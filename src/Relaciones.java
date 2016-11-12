@@ -7,12 +7,19 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+
 public class Relaciones {
 	
 	public Graph grafo = new SingleGraph("Ciudades de Guatemala"); 
-	public ArrayList<ArrayList> matriz = new ArrayList(); 
-	
-	public void Pruebas(String direccion){
+	public ArrayList<ArrayList<String>> matriz = new ArrayList<ArrayList<String>>();
+    public ArrayList<String> names = new ArrayList<String>();
+
+
+
+    /*Se crea el primer Arraylist de la matriz, que contiene solo un espacio en blanco*/
+
+
+    public void Pruebas(String direccion){
         BufferedReader crunchifyBuffer = null;
 
         try {
@@ -59,12 +66,24 @@ public class Relaciones {
 	
 	
 	public void crearNodo(String ciudad){
-		grafo.addNode(ciudad); 
+		grafo.addNode(ciudad);
+        for (String dato : matriz.get(0)){
+            if(ciudad.equals(dato)){
+                System.out.println("Esa ciudad ya existe en la matriz");
+                break;
+
+            }
+        }
+
+
+
 	}
 	
 	public void crearRelacion(String ciudadOrigen, String ciudadDestino, int distancia){
 		Edge eje = grafo.addEdge(ciudadOrigen + ciudadDestino, ciudadOrigen, ciudadDestino); 
 		eje.addAttribute("distancia", distancia);
+
+
 		
 	}
 	
